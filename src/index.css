@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.center-header {
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.input {
+  margin-left: 10px;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2;
+}
+
+.input:focus{
+  color: #212529;
+  background-color: #fff;
+  border-color: #bdbdbd;
+  outline: 0;
+}
+
+.input-label{
+  display: inline-block;
+  width: 100px;
+}
+
+.login-input{
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  padding: 8px 16px;
+}
+
+.password-input{
+  justify-content: center;
+  display: flex;
+  margin-top: 5px;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  padding: 8px 16px;
+}
+
+
+.submit-button{
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #4676D7;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.main-body{
+  background-color: rgb(237, 235, 235);
+  display: block;
+  border: 0px solid #ccc;
+  border-radius: 7%;
+  width: 400px;
+  height: 280px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.reg{
+  display: block;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50% , -50%)
+}
