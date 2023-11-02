@@ -1,3 +1,4 @@
+import Registration from "../Components/Registrat"
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
@@ -28,23 +29,23 @@ function PasswordInput({refPassword, setPassword}){
 function SubmitButton({onClick}) {
   return(
     <>
-      <button className="submit-button" onClick={onClick}>Зарегистрировать</button>
+      <button className="submit-button" onClick={onClick}>Войти</button>
     </>
   );
 }
 
-function Already_had_acc () {
+function Yet_hadnt_acc () {
   return (
     <>
     <div className="you-had-acc">
-        <p className="one-row-text">Уже есть аккаунт?</p> 
-        <Nav.Link className="one-row-text"><Link to="/authorization">Войти.</Link></Nav.Link>
+        <p className="one-row-text">Еще нет аккаунта?</p> 
+        <Nav.Link className="one-row-text"><Link to="/registration">Создать.</Link></Nav.Link>
     </div>
     </>
   )
 }
 
-function Registration() {
+function Authorization() {
   const [Login, setLogin] = useState("");
   const [Password, setPassword] = useState("");
   const refLogin = React.createRef(null);
@@ -77,12 +78,12 @@ function Registration() {
       <Header/>
       <div className="main-body">
         <div className="reg">
-          <h1 className="center-header">Регистрация</h1>
+          <h1 className="center-header">Авторизация</h1>
           <div className="data-input">
             <LoginInput refLogin = {refLogin} setLogin={setLogin}/>
             <PasswordInput refPassword = {refPassword} setPassword={setPassword}/>
             <SubmitButton onClick={handleClick}/>
-            <Already_had_acc/>
+            <Yet_hadnt_acc/>
           </div>
         </div>
       </div>
@@ -90,8 +91,10 @@ function Registration() {
   );
 }
 
-export const registration = () => {
-  return (
-    <Registration/>
-  )
+export const authorization = () => {
+    return(
+        <div>
+            <Authorization/>
+        </div>
+    )
 }

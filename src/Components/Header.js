@@ -15,9 +15,9 @@ export default class Header extends Component {
                     <Navbar.Toggle aria-controls = "responsive-navbar-nav"/>
                     <Navbar.Collapse id = "responsive-navbar-nav">
                         <Nav className = "mr-auto">
-                            <Nav.Link><Link to="/about-us" style={{textDecoration: "none", color: 'white'}}>About us</Link></Nav.Link>
-                            <Nav.Link><Link to="/contests" style={{textDecoration: "none", color: 'white'}}>Contests</Link></Nav.Link>
-                            <Nav.Link><Link to="/bLog" style={{textDecoration: "none", color: 'white'}}>Blog</Link></Nav.Link>
+                            <Nav.Link><Link to="/about-us" style={{textDecoration: "none", color: 'white'}}>О нас</Link></Nav.Link>
+                            <Nav.Link><Link to="/contests" style={{textDecoration: "none", color: 'white'}}>Контесты</Link></Nav.Link>
+                            <Nav.Link><Link to="/bLog" style={{textDecoration: "none", color: 'white'}}>Блог</Link></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
