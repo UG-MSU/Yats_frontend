@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+const url = 'http://127.0.0.1/';
  
 function LoginInput({refLogin, setLogin}){
   return (
@@ -64,13 +65,22 @@ function Authorization() {
         "Password": Password
       })
     };
-      console.log(Login, Password)
-      fetch('http://127.0.0.1', requestOptions) 
-      .then(response => console.log(response.json()))
-      .then(data => console.log(data))
-      .catch(e => {
-      //  console.log(e)
-      })
+    let resp = "";
+    let role = "";
+    fetch(url + '/auth/sign-in', requestOptions) 
+    .then(response => console.log(response.json()))
+    .then(data => { resp = data.json()["error"]
+                    if(resp == "success"){
+                      fetch(url + "/auth/role", requestOptions)
+                      .then(response => console.log(response))
+                      .then(data => {
+                          role = data.json()["role"];
+                      })
+                    }
+    })
+    .catch(e => {
+      console.log(e)
+    })
   }
 
   return (
