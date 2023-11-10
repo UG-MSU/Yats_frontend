@@ -1,10 +1,10 @@
-import Registration from "../Components/Registrat"
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import '../Styles/Registrat.css';
 const url = 'http://127.0.0.1/';
  
 function LoginInput({refLogin, setLogin}){
@@ -61,23 +61,36 @@ function Authorization() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "Login": Login,
-        "Password": Password
+        "username": Login,
+        "password": Password
       })
     };
+    const requestOptionsGET = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
     let resp = "";
-    let role = "";
+    let role;
     fetch(url + '/auth/sign-in', requestOptions) 
-    .then(response => console.log(response.json()))
-    .then(data => { resp = data.json()["error"]
-                    if(resp == "success"){
-                      fetch(url + "/auth/role", requestOptions)
-                      .then(response => console.log(response))
-                      .then(data => {
-                          role = data.json()["role"];
-                      })
-                    }
-    })
+    .then(response => response.json())
+    .then(data => 
+      {
+        resp = data["error"]
+        console.log(resp)
+        if (resp = "success") {
+          fetch(url + "/contest/has-permission-to-create-contest", requestOptionsGET)
+                        .then(response => 
+                          response.json())
+                        .then(data => {
+                          role = data["has_permission"];
+                          console.log(role)
+                        })
+                        console.log(role)
+        } else {
+          console.log("EGOR DAUN")
+        }
+      }
+      )
     .catch(e => {
       console.log(e)
     })

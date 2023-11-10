@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import '../Styles/Registrat.css';
 const url = 'http://127.0.0.1/';
  
 function LoginInput({refLogin, setLogin}){
@@ -69,15 +70,7 @@ function Registration() {
       let role = "";
       fetch(url + '/auth/sign-up', requestOptions) 
       .then(response => console.log(response.json()))
-      .then(data => { resp = data.json()["error"]
-                      if(resp == "success"){
-                        fetch(url + "/auth/role", requestOptions)
-                        .then(response => console.log(response))
-                        .then(data => {
-                            role = data.json()["role"];
-                        })
-                      }
-      })
+      .then(data => { resp = data.json()["error"] })
       .catch(e => {
         console.log(e)
       })
