@@ -8,6 +8,7 @@ import Header from './Components/Header';
 import { contests } from './Pages/Contests';
 import { authorization } from './Components/Authoriz';
 import { registration } from './Components/Registrat';
+import { profile } from './Pages//Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
         <Route exact path="/contests" Component = {contests}/>
         <Route exact path="/authorization" Component = {authorization}/>
         <Route exact path="/registration" Component = {registration}/>
+        <Route exact path="/profile" Component={profile}/>
       </Routes>
   </HashRouter>
 );

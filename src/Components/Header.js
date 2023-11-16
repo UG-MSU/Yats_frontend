@@ -17,7 +17,7 @@ export default class Header extends Component {
                         <Nav className = "mr-auto">
                             <Nav.Link><Link to="/about-us" style={{textDecoration: "none", color: 'white'}}>О нас</Link></Nav.Link>
                             <Nav.Link><Link to="/contests" style={{textDecoration: "none", color: 'white'}}>Контесты</Link></Nav.Link>
-                            <Nav.Link><Link to="/bLog" style={{textDecoration: "none", color: 'white'}}>Блог</Link></Nav.Link>
+                            <Nav.Link><Link to="/profile" style={{textDecoration: "none", color: 'white'}}>Профиль</Link></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
