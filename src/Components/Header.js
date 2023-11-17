@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import logo from "./logo192.png"
 
 export default class Header extends Component {
     render() {
