@@ -5,7 +5,7 @@ import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../Styles/Registrat.css';
-const url = 'http://127.0.0.1/';
+const url = 'http://127.0.0.1:8000';
  
 function LoginInput({refLogin, setLogin}){
   return (
@@ -94,6 +94,20 @@ function Authorization() {
     .catch(e => {
       console.log(e)
     })
+    
+
+    // .then(response => console.log(response.json()))
+    // .then(data => { resp = data.json()["error"]
+    //                 console.log(data.json()["error"])
+    //                 if(resp == "success"){
+    //                   fetch(url + "/auth/role", requestOptions)
+    //                   .then(response => console.log(response))
+    //                   .then(data => {
+    //                       role = data.json()["role"];
+    //                   })
+    //                 }
+    // })
+    // console.log(role);
   }
 
   return (

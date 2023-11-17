@@ -5,7 +5,8 @@ import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../Styles/Registrat.css';
-const url = 'http://127.0.0.1/';
+const url = 'http://127.0.0.1:8000';
+
  
 function LoginInput({refLogin, setLogin}){
   return (
