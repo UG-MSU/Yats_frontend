@@ -75,7 +75,7 @@ function Authorization() {
     .then(response => response.json())
     .then(data => 
       {
-        resp = data["error"]
+        resp = data["status"]
         console.log(resp)
         if (resp = "success") {
           fetch(url + "/contest/has-permission-to-create-contest", requestOptionsGET)
