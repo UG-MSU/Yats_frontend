@@ -5,7 +5,7 @@ import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../Styles/Registrat.css';
-const url = 'http://127.0.0.1:8000';
+const url = 'http://127.0.0.1:8000/';
  
 function LoginInput({refLogin, setLogin}){
   return (
@@ -65,27 +65,27 @@ function Authorization() {
         "password": Password
       })
     };
-    const requestOptionsGET = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
+    // const requestOptionsGET = {
+    //   method: 'GET',
+    //   headers: { 'Content-Type': 'application/json' },
+    // };
     let resp = "";
     let role;
     fetch(url + '/auth/sign-in', requestOptions) 
     .then(response => response.json())
     .then(data => 
       {
-        resp = data["error"]
+        resp = data["status"]
         console.log(resp)
-        if (resp = "success") {
-          fetch(url + "/contest/has-permission-to-create-contest", requestOptionsGET)
-                        .then(response => 
-                          response.json())
-                        .then(data => {
-                          role = data["has_permission"];
-                          console.log(role)
-                        })
-                        console.log(role)
+        if (resp = "ok") {
+          // fetch(url + "/contest/has-permission-to-create-contest", requestOptionsGET)
+          //               .then(response => 
+          //                 response.json())
+          //               .then(data => {
+          role = data["has_permission"];
+          console.log(role)
+          //               })
+          //               console.log(role)
         } else {
           console.log("EGOR DAUN")
         }
