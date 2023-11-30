@@ -1,91 +1,99 @@
 .Main {
-    padding-top: 6.438vw;
-    position: absolute;
-    margin-top: 6vh;
-    min-height: 94vh;
-    min-width: 100vw;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 3.12rem;
-    flex-wrap: wrap;
-  }
-  
-  .Ava_group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.611vh;
-  }
-  
-  .Ava {
-    height: 16.094vw;
-    width: 16.094vw;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .Nick {
-    font-size: 5.156vh;
-    text-align: center;
-    color: #fff;
-  }
-  
-  .but {
-    padding: 1.074vh;
-    border-radius: 0.752vh;
-    background: #23262d;
-    color: #fff;
-    font-size: 3.437vh;
-    border: 0;
-    text-decoration: none;
-  }
-  
-  .but:hover {
-    background-color: #130080;
-    text-decoration: none;
-  }
-  .but:active {
-    background-color: #ff0000;
-    text-decoration: none;
-  }
-  
-  .Texts {
-    display: flex;
-    flex-direction: column;
-    gap: 4.296vh;
-  }
-  
-  .Buttons {
-    display: flex;
-    gap: 2.682vw;
-  }
-  
-  .Data {
-    display: flex;
-    padding: 1.611vh 1.073vw;
-    justify-content: center;
-    align-items: center;
-    gap: 0.805vw;
-    border-radius: 1.074vh;
-    background: #d9d9d9;
-  }
-  
-  .Layout {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1.611vh;
-    color: #000000;
-    font-size: 3.867vh;
-  }
-  
-  .Answers {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.611vh;
-    color: #000000;
-    font-size: 3.867vh;
-  }
-  
+  padding-top: 6.438vw;
+  position: absolute;
+  margin-top: 6vh;
+  min-width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 2.682vw;
+  flex-wrap: wrap;
+}
+
+.Ava_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.073vw;
+}
+
+.Ava {
+  height: 32.223vh;
+  width: 32.223vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Nick {
+  font-size: 5.156vh;
+  text-align: center;
+}
+
+.but {
+  padding: 1.074vh;
+  border-radius: 0.752vh;
+  background: #23262d;
+  color: #fff;
+  font-size: 150%;
+  border: 0;
+  text-decoration: none;
+}
+
+.but:hover {
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  border: 1px solid;
+  border-color: black;
+  text-decoration: none;
+  color: #FFF;
+}
+/* .but:active {
+  background-color: #ff0000;
+  text-decoration: none;
+} */
+
+.Texts {
+  display: flex;
+  flex-direction: column;
+  gap: 4.296vh;
+}
+
+.Buttons {
+  display: flex;
+  gap: 2.682vw;
+}
+
+.Data {
+  display: flex;
+  padding: 1.611vh 1.073vw;
+  justify-content: center;
+  gap: 0.805vw;
+  border-radius: 1.074vh;
+  background: #d9d9d9;
+}
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.611vh;
+  color: #000000;
+  font-size: 3.867vh;
+}
+
+.Answers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.611vh;
+  color: #000000;
+  font-size: 3.867vh;
+  max-width: 36.588vw;
+}
+
+h2 {
+  white-space: nowrap;
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 36.588vw;
+}

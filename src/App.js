@@ -7,7 +7,6 @@ import {registration as Registration} from './Components/Registrat.js';
 export default function App() {
   return (
     <div>
-      <Header/>
       <Registration/>
     </div>
   );

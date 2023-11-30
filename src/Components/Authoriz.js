@@ -112,7 +112,6 @@ function Authorization() {
 
   return (
       <>
-      <Header/>
       <div className="main-body">
         <div className="reg">
           <h1 className="center-header">Авторизация</h1>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Profile.css";
+import "../Styles/Profile.css";
 import ava from "../Components/Gojo2.gif";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -8,7 +8,6 @@ import Header from "../Components/Header";
 function Profile({ userId = 1 }) {
   return (
     <>
-      <Header />
       <Container className="Main">
         <div className="Ava_group">
           <img className="Ava" src={ava} />
@@ -28,24 +27,24 @@ function Profile({ userId = 1 }) {
           </div>
           <div className="Data">
             <div className="Layout">
-              <div>Имя:</div>
-              <div>Фамилия:</div>
-              <div>Отчество:</div>
-              <div>Страна:</div>
-              <div>Город:</div>
-              <div>Школа:</div>
-              <div>Почта:</div>
-              <div>Пароль:</div>
+              <h2>Имя:</h2>
+              <h2>Фамилия:</h2>
+              <h2>Отчество:</h2>
+              <h2>Страна:</h2>
+              <h2>Город:</h2>
+              <h2>Школа:</h2>
+              <h2>Почта:</h2>
+              <h2>Пароль:</h2>
             </div>
             <div className="Answers">
-              <div>Сатору</div>
-              <div>Годжо</div>
-              <div>~</div>
-              <div>Япония</div>
-              <div>Токио</div>
-              <div>Токийский магический технический колледж</div>
-              <div>thestrongestsatorugojo1989@gmail.com</div>
-              <div>GojoIsTheBest</div>
+              <h2>Сатору</h2>
+              <h2>Годжо</h2>
+              <h2>~</h2>
+              <h2>Япония</h2>
+              <h2>Токио</h2>
+              <h2>Токийский магический технический колледж</h2>
+              <h2>thestrongestsatorugojo1989@gmail.com</h2>
+              <h2>GojoIsTheBest</h2>
             </div>
           </div>
         </div>

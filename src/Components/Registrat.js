@@ -80,7 +80,6 @@ function Registration() {
 
   return (
       <>
-      <Header/>
       <div className="main-body">
         <div className="reg">
           <h1 className="center-header">Регистрация</h1>
