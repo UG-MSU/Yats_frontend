@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import Header from './Header.js';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../Styles/Registrat.css';
