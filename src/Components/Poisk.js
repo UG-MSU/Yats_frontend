@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Container, Form, Button, Row, Col } from 'react-bootstrap'
+import '../Styles/Poisk.css'
 
-<Form inline>
-      <Row>
-            <Col xs="auto">
-                <Form.Control
-                    type="text"
-                    placeholder="Введите запрос..."
-                    className="mr-sm-2"
-                />
-            </Col>
-            <Col xs="auto">
-                <Button variant ="outline-info">Поиск</Button>
-            </Col>
-      </Row>
-</Form>
+
+export default class Poisk extends Component {
+    render() {
+        return (
+            <>
+            <Form inline>
+                <Row>
+                    <Col xs="auto">
+                        <input
+                            type="text"
+                            placeholder="Введите запрос..."
+                            className="Form-Poisk"
+                        />
+                    </Col>
+                    <Col xs="auto">
+                        <Button variant ="dark">Поиск</Button>
+                    </Col>
+                </Row>
+            </Form>    
+            </>
+        )
+    }
+}
