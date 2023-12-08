@@ -4,14 +4,15 @@ import { useEffect, useRef } from "react";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 import modelPath from '../Components/msu.glb'
-function Msu3D() {
+function Msu3D(props) {
+    const { sizeX, sizeY } = props
     const refContainer = useRef(null);
     useEffect(() => {
         // === THREE.JS CODE START ===
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(75, 2, 0.1, 1000);
+        var camera = new THREE.PerspectiveCamera(75, sizeX / sizeY, 0.1, 1000);
         var renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(800, 400);
+        renderer.setSize(sizeX, sizeY);
 
         renderer.setClearColor(0xffffff, 0);    // document.body.appendChild( renderer.domElement );
         // use ref as a mount point of the Three.js scene instead of the document.body
@@ -34,33 +35,42 @@ function Msu3D() {
         camera.position.setZ(0.7)
         scene.add(light)
         let lastMouseX = 0
+        let lastMouseY = 0
         function onPointerMove(event) {
-
-            // calculate pointer position in normalized device coordinates
-            // (-1 to +1) for both components
-
             var pointerx = (event.clientX / window.innerWidth) * 2 - 1;
             var pointery = - (event.clientY / window.innerHeight) * 2 + 1;
             if (msu) {
-                if (pointerx - lastMouseX < 0) {
-                    msu.rotation.y -= 0.03
-                } else {
-                    msu.rotation.y += 0.03
+                if (Math.abs(pointerx - lastMouseX) > 0.003) {
+                    // if (pointerx - lastMouseX < 0) {
+                    //     msu.rotation.y -= 0.03
+                    // } else {
+                    //     msu.rotation.y += 0.03
+                    // }
+                    msu.rotation.y += (pointerx - lastMouseX)*3
                 }
-            }
-            lastMouseX = pointerx
+                if (Math.abs(pointery - lastMouseY) > 0.003) {
+                    // if (pointery - lastMouseY < 0) {
+                    //     msu.rotation.x += 0.01
+                    // } else {
+                    //     msu.rotation.x -= 0.01
+                    // }
 
+                }
+                lastMouseX = pointerx
+                lastMouseY = pointery
+
+            }
         }
-        window.addEventListener('pointermove', onPointerMove);
-        function animate() {
-            // if (msu) {
-            //     msu.rotation.y += 0.01
-            // }
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera)
-        }
-        animate()
-    }, []);
+            window.addEventListener('pointermove', onPointerMove);
+            function animate() {
+                // if (msu) {
+                //     msu.rotation.y += 0.01
+                // }
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera)
+            }
+            animate()
+        }, []);
     return (
         <div ref={refContainer}></div>
 
