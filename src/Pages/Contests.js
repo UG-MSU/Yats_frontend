@@ -11,13 +11,14 @@ const URL = 'http://127.0.0.1:8000/contest/user-contests/'
 function Contests() {
     async function getData() {
         const cookies = new Cookies()
+        const request = "Token " + cookies.get("token_auth")
         console.log(cookies.get("token_auth"))
         try {
             const response = await fetch(URL, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": cookies.get("token_auth")
+                "Authorization": request
             }
             });
             

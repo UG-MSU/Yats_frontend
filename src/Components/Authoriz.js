@@ -73,7 +73,7 @@ function Authorization() {
     // };
     let resp = "";
     //let role;
-    fetch(url + '/auth/token', requestOptions) 
+    fetch(url + 'auth/token/', requestOptions) 
     .then(response => response.json())
     .then(data => 
       {
@@ -85,13 +85,13 @@ function Authorization() {
           //                 response.json())
           //               .then(data => {
           //role = data["has_permission"];
-          const token = data["Authorization"]
+          const token = data["access"]
           cookies.set("token_auth", token)
           console.log(token)
           //               })
           //               console.log(role)
         } else {
-          console.log("EGOR DAUN")
+          console.log("EGOR MOLODEC")
         }
       }
       )
