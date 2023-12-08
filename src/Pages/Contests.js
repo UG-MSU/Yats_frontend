@@ -2,6 +2,7 @@ import Registration from "../Components/Registrat"
 import { Navbar, Nav, Container, Form, Button, Row, Col } from 'react-bootstrap'
 import '../Styles/Contests.css';
 import '../Styles/index.css';
+import Cookies from "universal-cookie"
 import Poisk from '../Components/Poisk'
 
 const URL = 'http://127.0.0.1:8000/contest/user-contests/'
@@ -9,12 +10,14 @@ const URL = 'http://127.0.0.1:8000/contest/user-contests/'
 
 function Contests() {
     async function getData() {
-
+        const cookies = new Cookies()
+        console.log(cookies.get("token_auth"))
         try {
             const response = await fetch(URL, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": cookies.get("token_auth")
             }
             });
             
