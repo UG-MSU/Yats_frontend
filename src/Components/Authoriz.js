@@ -72,8 +72,8 @@ function Authorization() {
     //   headers: { 'Content-Type': 'application/json' },
     // };
     let resp = "";
-    let role;
-    fetch(url + '/auth/sign-in', requestOptions) 
+    //let role;
+    fetch(url + '/auth/token', requestOptions) 
     .then(response => response.json())
     .then(data => 
       {
