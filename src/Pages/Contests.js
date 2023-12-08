@@ -3,9 +3,20 @@ import { Navbar, Nav, Container, Form, Button, Row, Col } from 'react-bootstrap'
 import '../Styles/Contests.css';
 import '../Styles/index.css';
 import Poisk from '../Components/Poisk'
+import {useState} from 'react';
 
 const URL = 'http://127.0.0.1:8000/contest/user-contests/'
 
+
+const Modal = ({active, setActive, children}) => {
+    return (
+        <div className={active ? "pop-up active" : "pop-up"} onClick={() => setActive(false)}>
+                <div className="pop-up--content" onClick={e => e.stopPropagation()}>
+                    {children}
+                </div>
+            </div>
+    )
+}
 
 function Contests() {
     async function getData() {
@@ -33,6 +44,9 @@ function Contests() {
     }
 
     const data = getData();
+
+    const [regActive, setRegActive] = useState(false);
+    const [creatActive, setCreatActive] = useState(false);
 
     return(
         <div className="body">
@@ -68,9 +82,9 @@ function Contests() {
 
                     <div className="buttons">
 
-                        <div className="button">Регистрация на контест</div>
+                        <div className="button" onClick={() => setRegActive(true)}>Регистрация на контест</div>
                         
-                        <div className="button">Создать контест</div>
+                        <div className="button" onClick={() => setCreatActive(true)}>Создать контест</div>
 
                     </div>
                 </div>
@@ -107,6 +121,21 @@ function Contests() {
                     
                 </div>
             </div>
+
+            <Modal active={regActive} setActive={setRegActive}>
+                <h4>Регистрация</h4>
+                <input placeholder="введите id" className="input"></input>
+                <input placeholder="введите пароль" className="input"></input>
+                <div className="button pop-up--but">Зарегестрироваться</div>
+            </Modal>
+
+            <Modal active={creatActive} setActive={setCreatActive}>
+                <h4>Создание</h4>
+                <input placeholder="введите название" className="input"></input>
+                <input placeholder="введите id" className="input"></input>
+                <input placeholder="введите пароль" className="input"></input>
+                <div className="button pop-up--but">Создать</div>
+            </Modal>
         
         </div>
         </div>

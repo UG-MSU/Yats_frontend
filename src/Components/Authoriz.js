@@ -86,7 +86,7 @@ function Authorization() {
           //               })
           //               console.log(role)
         } else {
-          console.log("EGOR DAUN")
+          console.log("")
         }
       }
       )
