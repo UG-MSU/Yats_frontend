@@ -6,7 +6,11 @@ import Msu3D from "../Components/Msu3D"
 
 
 
+import '../Styles/Contests.css';
+import '../Styles/index.css';
+import Poisk from '../Components/Poisk'
 
+const URL = 'http://127.0.0.1:8000/contest/user-contests/'
 
 
 function Contests() {
@@ -14,34 +18,108 @@ function Contests() {
 
 
     async function getData() {
-        const response = await fetch(URL + 'user-contest/');
-        const data = await response.json();
-        // setResults(data); 
+
+        try {
+            const response = await fetch(URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+            });
+            
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        
+            const data = await response.json();
+            console.log(data);
+            return data;
+        
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            return null;
+        }
     }
-    // getData();
 
-    //console.log(results);
+    const data = getData();
 
-    return (
-        <div>
-            <div>
-                <span>Регистрация</span>
-                <span>Создать</span>
-            </div>
-            <Msu3D/>
+    return(
+        <div className="body">
+        <div className="main-container">
 
-            <div>Мои контесты</div>
-            <div>
-                {/* <ul>
-                    {results.map(contest => (
-                        <div>
-                            <li key={contest.id}>{contest.name}</li>
+            <div className = "my-contests">
+
+                <div className="header">
+                    <h2 className="header-title">Мои контесты</h2>
+                    <Poisk/>
+                </div>
+                <div className="content">
+                    <div className="contests">
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
                         </div>
-                    ))}
-                </ul> */}
-            </div>
-        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                    </div>
 
+                    <div className="buttons">
+
+                        <div className="button">Регистрация на контест</div>
+                        
+                        <div className="button">Создать контест</div>
+
+                    </div>
+                </div>
+            </div>
+
+            
+            <div className = "my-contests">
+
+                <div className="header">
+                    <h2 className="header-title">Архив</h2>
+                </div>
+                <div className="content">
+                    <div className="contests">
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">Contest name</div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        
+        </div>
+        </div>
+        
     )
 
 }

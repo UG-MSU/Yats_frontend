@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import logo from "./logo192.png"
 
 export default class Header extends Component {
     render() {
         return (
             <>
-            <Navbar fixed="top" collapseOnSelect expand="md" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/home">
                         YATS
