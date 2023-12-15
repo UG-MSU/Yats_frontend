@@ -9,34 +9,48 @@ const URL = 'http://127.0.0.1:8000/contest/user-contests/'
 
 
 function Contests() {
-    async function getData() {
+    async function getData(){
         const cookies = new Cookies()
         const request = "Token " + cookies.get("token_auth")
         console.log(cookies.get("token_auth"))
-        try {
-            const response = await fetch(URL, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": request
-            }
-            });
+        // try {
+            console.log("KEK")
+            await fetch(URL, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": request
+                }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    return data})
+            // console.log(data)
+            // const response = await fetch(URL, {
+            // method: "GET",
+            // headers: {
+            //     "Content-Type": "application/json",
+            //     "Authorization": request
+            // }
+            // });
             
-            if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            // if (!response.ok) {
+            // throw new Error(`HTTP error! Status: ${response.status}`);
+            // }
         
-            const data = await response.json();
-            console.log(data);
-            return data;
+            // const data = await response.json();
+            // console.log(data);
+            // return data;
         
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            return null;
-        }
+        // } catch (error) {
+        //     console.error("Error fetching data:", error);
+        //     return null;
+        // }
     }
 
     const data = getData();
+    console.log(data)
 
     return(
         <div className="body">
@@ -51,7 +65,7 @@ function Contests() {
                 <div className="content">
                     <div className="contests">
                         <div className="contest">
-                            <div className="contest-name">Contest name</div>
+                            <div className="contest-name"> { data["contests"] }  </div>
                         </div>
                         <div className="contest">
                             <div className="contest-name">Contest name</div>

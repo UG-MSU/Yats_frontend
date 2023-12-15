@@ -3,25 +3,55 @@ import "../Styles/Profile.css";
 import ava from "../Components/Gojo2.gif";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import Header from "../Components/Header";
+import Cookies from "universal-cookie"
+import Poisk from '../Components/Poisk'
 
-function Profile({ userId = 1 }) {
+const URL = 'http://127.0.0.1:8000/user/'
+
+function Profile() {
+  async function getData() {
+      const cookies = new Cookies()
+      const request = "Token " + cookies.get("token_auth")
+      console.log(cookies.get("token_auth"))
+      try {
+          const response = await fetch(URL, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Contests": request
+          }
+          });
+        
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+    
+          const data = await response.json();
+          console.log(data);
+          return data;
+    
+      } catch (error) {
+          console.error("Error fetching data:", error);
+          return null;
+      }
+  }
+  const data = getData();
   return (
     <>
       <Container className="Main">
         <div className="Ava_group">
           <img className="Ava" src={ava} />
-          <div className="Nick">Сатору Годжо</div>
-          <Link className="but" to={`/edit-profile/${userId}`}>
+          <div className="Nick"> {{ data }}</div>
+          <Link className="but" to={`/edit-profile/1`}>
             Редактировать профиль
           </Link>
         </div>
         <div className="Texts">
           <div className="Buttons">
-            <Link className="but" to={`/my-contests/${userId}`}>
+            <Link className="but" to={`/my-contests/1`}>
               Мои контесты
             </Link>
-            <Link className="but" to={`/tasks-bank/${userId}`}>
+            <Link className="but" to={`/tasks-bank/1}`}>
               Банк задач
             </Link>
           </div>
