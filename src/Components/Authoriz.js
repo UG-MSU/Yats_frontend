@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 import '../Styles/Registrat.css';
 import Cookies from "universal-cookie"
 const url = 'http://127.0.0.1:8000/';
+//for kinoman
+// import Cookies from "universal-cookie"
+// const cookies = new Cookies()
+// const token = cookies.get("token_auth")
  
 function LoginInput({refLogin, setLogin}){
   return (
