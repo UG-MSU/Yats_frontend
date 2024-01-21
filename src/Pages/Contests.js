@@ -1,4 +1,3 @@
-import Registration from "../Components/Registrat"
 import { Navbar, Nav, Container, Form, Button, Row, Col } from 'react-bootstrap'
 import React, { useRef, useEffect } from 'react'
 import { Suspense } from 'react'
@@ -9,9 +8,9 @@ import Msu3D from "../Components/Msu3D"
 import '../Styles/Contests.css';
 import '../Styles/index.css';
 import Poisk from '../Components/Poisk'
-import {useState} from 'react';
-
-const URL = 'http://127.0.0.1:8000/contest/user-contests/'
+import {useState, useEffect} from 'react';
+import axios from "axios";
+const URL = 'http://127.0.0.1:8000/contest/user-contests/?id='
 
 
 const Modal = ({active, setActive, children}) => {
@@ -29,7 +28,6 @@ function Contests() {
 
 
     async function getData() {
-
         try {
             const response = await fetch(URL, {
                 method: "GET",
@@ -57,6 +55,17 @@ function Contests() {
 
     const [regActive, setRegActive] = useState(false);
     const [creatActive, setCreatActive] = useState(false);
+    
+    const contestsperpage = 6;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        setCurrentPage(JSON.parse(window.localStorage.getItem('currentPage')));
+    }, []);
+    
+    useEffect(() => {
+        window.localStorage.setItem('currentPage', currentPage);
+    }, [currentPage]);
 
     return(
         <div className="body">
@@ -64,6 +73,30 @@ function Contests() {
 
                 <div className="my-contests">
 
+                <div className="header">
+                    <h2 className="header-title">Мои контесты</h2>
+                    <Poisk/>
+                </div>
+                <div className="content">
+                    <div className="contests">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a className={currentPage - 1 ? "page-link" : "page-link none"} aria-label="Previous" onClick={()=>{setCurrentPage(currentPage - 1)}}>
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link">{currentPage}</a></li>
+                                <li class="page-item"><a class="page-link" onClick={()=>{setCurrentPage(currentPage + 1)}}>{currentPage + 1}</a></li>
+                                <li class="page-item"><a class="page-link" onClick={()=>{setCurrentPage(currentPage + 2)}}>{currentPage + 2}</a></li>
+                                <li class="page-item">
+                                <a class="page-link" aria-label="Next" onClick={()=>{setCurrentPage(currentPage + 1)}}>
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                     <div className="header">
                         <h2 className="header-title">Мои контесты</h2>
                         <Poisk />
