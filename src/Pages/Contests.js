@@ -7,6 +7,7 @@ import Msu3D from "../Components/Msu3D"
 
 import '../Styles/Contests.css';
 import '../Styles/index.css';
+import Cookies from "universal-cookie"
 import Poisk from '../Components/Poisk'
 import { useState, useEffect } from 'react';
 import axios from "axios";
@@ -24,6 +25,44 @@ const Modal = ({ active, setActive, children }) => {
 }
 
 function Contests() {
+    async function getData(){
+        const cookies = new Cookies()
+        const request = "Token " + cookies.get("token_auth")
+        console.log(cookies.get("token_auth"))
+        // try {
+            console.log("KEK")
+            await fetch(URL, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": request
+                }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    return data})
+            // console.log(data)
+            // const response = await fetch(URL, {
+            // method: "GET",
+            // headers: {
+            //     "Content-Type": "application/json",
+            //     "Authorization": request
+            // }
+            // });
+            
+            // if (!response.ok) {
+            // throw new Error(`HTTP error! Status: ${response.status}`);
+            // }
+        
+            // const data = await response.json();
+            // console.log(data);
+            // return data;
+        
+        // } catch (error) {
+        //     console.error("Error fetching data:", error);
+        //     return null;
+        // }
 
 
 
@@ -52,22 +91,7 @@ function Contests() {
 
     const data = getData();
 
-
-    const [regActive, setRegActive] = useState(false);
-    const [creatActive, setCreatActive] = useState(false);
-
-    const contestsperpage = 6;
-    const [currentPage, setCurrentPage] = useState(1);
-
-    useEffect(() => {
-        setCurrentPage(JSON.parse(window.localStorage.getItem('currentPage')));
-    }, []);
-
-    useEffect(() => {
-        window.localStorage.setItem('currentPage', currentPage);
-    }, [currentPage]);
-
-    return (
+    return(
         <div className="body">
             <div className="main-container">
 

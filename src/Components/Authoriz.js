@@ -4,7 +4,12 @@ import { useState } from 'react';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../Styles/Registrat.css';
+import Cookies from "universal-cookie"
 const url = 'http://127.0.0.1:8000/';
+//for kinoman
+// import Cookies from "universal-cookie"
+// const cookies = new Cookies()
+// const token = cookies.get("token_auth")
  
 function LoginInput({refLogin, setLogin}){
   return (
@@ -48,6 +53,7 @@ function Yet_hadnt_acc () {
 function Authorization() {
   const [Login, setLogin] = useState("");
   const [Password, setPassword] = useState("");
+
   const refLogin = React.createRef(null);
   const refPassword = React.createRef(null);
   function handleClear() {
@@ -56,6 +62,7 @@ function Authorization() {
   }
   function handleClick(){
     handleClear();
+    const cookies = new Cookies()
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -69,8 +76,8 @@ function Authorization() {
     //   headers: { 'Content-Type': 'application/json' },
     // };
     let resp = "";
-    let role;
-    fetch(url + '/auth/sign-in', requestOptions) 
+    //let role;
+    fetch(url + 'auth/token/', requestOptions) 
     .then(response => response.json())
     .then(data => 
       {
@@ -81,12 +88,14 @@ function Authorization() {
           //               .then(response => 
           //                 response.json())
           //               .then(data => {
-          role = data["has_permission"];
-          console.log(role)
+          //role = data["has_permission"];
+          const token = data["access"]
+          cookies.set("token_auth", token)
+          console.log(token)
           //               })
           //               console.log(role)
         } else {
-          console.log("")
+          console.log("EGOR MOLODEC")
         }
       }
       )
