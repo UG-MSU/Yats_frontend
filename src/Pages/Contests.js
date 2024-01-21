@@ -11,7 +11,7 @@ import Cookies from "universal-cookie"
 import Poisk from '../Components/Poisk'
 import { useState, useEffect } from 'react';
 import axios from "axios";
-const URL = 'http://127.0.0.1:8000/contest/user-contests/?id='
+const URL = 'http://127.0.0.1:8000/contest/user-contests/'
 
 
 const Modal = ({ active, setActive, children }) => {
@@ -23,31 +23,31 @@ const Modal = ({ active, setActive, children }) => {
         </div>
     )
 }
+let contest; // список контестов
+async function getData() {
+    const cookies = new Cookies()
+    const request = "Token " + cookies.get("token_auth")
+    console.log(cookies.get("token_auth"))
+    // try {
+    console.log("KEK")
+    await fetch(URL, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": request
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(JSON.stringify(data))
+            contest = data
+        })
+}
+await getData()
 
 function Contests() {
-    async function getData() {
-        const cookies = new Cookies()
-        const request = "Token " + cookies.get("token_auth")
-        console.log(cookies.get("token_auth"))
-        // try {
-        console.log("KEK")
-        await fetch(URL, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": request
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                return data
-            })
-    }
-    
-
-    const data = getData();
-    console.log(data);
+    console.log(contest);
+    console.log(contest["contests"]);
 
     const [regActive, setRegActive] = useState(false);
     const [creatActive, setCreatActive] = useState(false);
@@ -114,7 +114,7 @@ function Contests() {
                 <div className="content">
                     <div className="contests">
                         <div className="contest">
-                            <div className="contest-name">Contest name</div>
+                            <div className="contest-name">{contest["contests"][0]["name"]}</div>
                         </div>
                         <div className="contest">
                             <div className="contest-name">Contest name</div>
