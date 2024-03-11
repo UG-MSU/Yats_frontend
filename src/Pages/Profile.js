@@ -4,44 +4,48 @@ import ava from "../Components/Gojo2.gif";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Cookies from "universal-cookie"
-import Poisk from '../Components/Poisk'
 
-const URL = 'http://127.0.0.1:8000/user/'
+
+const URL = 'http://127.0.0.1:8000/auth/update'
+
+let prof;
+async function getData() {
+  const cookies = new Cookies()
+  const request = "Token " + cookies.get("token_auth")
+  // console.log("PIZDECC")
+  console.log(cookies.get("token_auth"))
+  // try {
+  // console.log("KEK__")
+  await fetch(URL, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": request
+      }
+  })
+      .then(response => response.json())
+      .then(data => {
+          // console.log("__end__")
+          console.log(JSON.stringify(data))
+          prof = data
+      })
+  // console.log("END")
+}
+await getData()
 
 function Profile() {
-  async function getData() {
-      const cookies = new Cookies()
-      const request = "Token " + cookies.get("token_auth")
-      console.log(cookies.get("token_auth"))
-      try {
-          const response = await fetch(URL, {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json",
-              "Contests": request
-          }
-          });
-        
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-    
-          const data = await response.json();
-          console.log(data);
-          return data;
-    
-      } catch (error) {
-          console.error("Error fetching data:", error);
-          return null;
-      }
-  }
-  const data = getData();
+  console.log("PIZDEC")
+  console.log(prof);
+  console.log(prof["user"]['first_name']);
+  const getpatron = (patron) => {
+    return patron !== "" ? patron : '~';
+  };
   return (
     <>
       <Container className="Main">
         <div className="Ava_group">
           <img className="Ava" src={ava} />
-          <div className="Nick"> {{ data }}</div>
+          <div className="Nick"> {prof["user"]['username']} </div>
           <Link className="but" to={`/edit-profile/1`}>
             Редактировать профиль
           </Link>
@@ -64,17 +68,15 @@ function Profile() {
               <h2>Город:</h2>
               <h2>Школа:</h2>
               <h2>Почта:</h2>
-              <h2>Пароль:</h2>
             </div>
             <div className="Answers">
-              <h2>Сатору</h2>
-              <h2>Годжо</h2>
-              <h2>~</h2>
-              <h2>Япония</h2>
-              <h2>Токио</h2>
-              <h2>Токийский магический технический колледж</h2>
-              <h2>thestrongestsatorugojo1989@gmail.com</h2>
-              <h2>GojoIsTheBest</h2>
+              <h2>{prof["user"]['first_name']}</h2>
+              <h2>{prof["user"]['last_name']}</h2>
+              <h2>{getpatron(prof["user"]['patronymic'])}</h2>
+              <h2>{prof["user"]['country']}</h2>
+              <h2>{prof["user"]['city']}</h2>
+              <h2>{prof["user"]['school']}</h2>
+              <h2>{prof["user"]['email']}</h2>
             </div>
           </div>
         </div>
