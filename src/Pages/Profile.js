@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/Profile.css";
 import ava from "../Components/Gojo2.gif";
 import { Link } from "react-router-dom";
@@ -8,45 +8,84 @@ import Cookies from "universal-cookie"
 
 const URL = 'http://127.0.0.1:8000/auth/update'
 
-let prof;
-async function getData() {
-  const cookies = new Cookies()
-  const request = "Token " + cookies.get("token_auth")
-  // console.log("PIZDECC")
-  console.log(cookies.get("token_auth"))
-  // try {
-  // console.log("KEK__")
-  await fetch(URL, {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": request
-      }
-  })
-      .then(response => response.json())
-      .then(data => {
-          // console.log("__end__")
-          console.log(JSON.stringify(data))
-          prof = data
-      })
-  // console.log("END")
-}
-await getData()
+// let prof;
+// async function getData() {
+//   const cookies = new Cookies()
+//   const request = "Token " + cookies.get("token_auth")
+//   // console.log("PIZDECC")
+//   console.log(cookies.get("token_auth"))
+//   // try {
+//   // console.log("KEK__")
+//   await fetch(URL, {
+//       method: "GET",
+//       headers: {
+//           "Content-Type": "application/json",
+//           "Authorization": request
+//       }
+//   })
+//       .then(response => response.json())
+//       .then(data => {
+//           // console.log("__end__")
+//           console.log(JSON.stringify(data))
+//           prof = data
+//       })
+//   // console.log("END")
+// }
+// await getData()
 
 function Profile() {
+
+  const [prof, setProf] = useState({}); // Используем useState для хранения данных профиля
+  const [loading, setLoading] = useState(true); // Состояние для отслеживания загрузки данных
+
+  useEffect(() => {
+    async function getData() {
+      const cookies = new Cookies();
+      const request = "Token " + cookies.get("token_auth");
+
+      try {
+        const response = await fetch(URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": request
+          }
+        });
+        const data = await response.json();
+  
+        setProf(data);
+        setLoading(false); // Устанавливаем loading в false после получения данных
+      } catch (error) {
+        console.error("Ошибка загрузки данных профиля:", error);
+      }
+    }
+  
+    getData();
+  }, []);
+
+  if (loading) {
+    return <p>Загрузка данных...</p>;
+  }
+
+  // Проверка, что prof содержит данные
+  if (!prof || Object.keys(prof).length === 0) {
+    return <p>Данные профиля недоступны.</p>;
+  }
+
   console.log("PIZDEC")
   console.log(prof);
   console.log(prof["user"]['first_name']);
   const getpatron = (patron) => {
     return patron !== "" ? patron : '~';
   };
+
   return (
     <>
       <Container className="Main">
         <div className="Ava_group">
           <img className="Ava" src={ava} />
           <div className="Nick"> {prof["user"]['username']} </div>
-          <Link className="but" to={`/edit-profile/1`}>
+          <Link className="but" to={"/edit-profile"}>
             Редактировать профиль
           </Link>
         </div>
@@ -77,6 +116,7 @@ function Profile() {
               <h2>{prof["user"]['city']}</h2>
               <h2>{prof["user"]['school']}</h2>
               <h2>{prof["user"]['email']}</h2>
+              {/* <h2>{prof["user"]['password']}</h2> */}
             </div>
           </div>
         </div>

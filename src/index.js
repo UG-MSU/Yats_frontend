@@ -9,6 +9,7 @@ import { contests } from './Pages/Contests';
 import { authorization } from './Components/Authoriz';
 import { registration } from './Components/Registrat';
 import { profile } from './Pages//Profile';
+import { editprofile } from './Pages/EditProfile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
         <Route exact path="/authorization" Component = {authorization}/>
         <Route exact path="/registration" Component = {registration}/>
         <Route exact path="/profile" Component={profile}/>
+        <Route exact path="/edit-profile" Component={editprofile}/>
       </Routes>
   </HashRouter>
 );

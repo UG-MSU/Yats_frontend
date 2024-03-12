@@ -2,16 +2,14 @@ import { Navbar, Nav, Container, Form, Button, Row, Col } from 'react-bootstrap'
 //import React, { useRef, useEffect } from 'react'
 import { Suspense } from 'react'
 import Msu3D from "../Components/Msu3D"
-
-
-
 import '../Styles/Contests.css';
 import '../Styles/index.css';
 import Cookies from "universal-cookie"
 import Poisk from '../Components/Poisk'
 import { useState, useEffect } from 'react';
 import axios from "axios";
-const URL = 'http://127.0.0.1:8000/contest/user-contests/'
+import { stringifyValueWithProperty } from 'react-native-web/dist/cjs/exports/StyleSheet/compiler';
+const URL = 'http://127.0.0.1:8000/contest/user-contests/?page=1'
 
 
 const Modal = ({ active, setActive, children }) => {
@@ -28,9 +26,8 @@ async function getData() {
     const cookies = new Cookies()
     const request = "Token " + cookies.get("token_auth")
     console.log(cookies.get("token_auth"))
-    // try {
     console.log("KEK")
-    await fetch(URL, {
+    await fetch(URL , {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -43,6 +40,8 @@ async function getData() {
             contest = data
         })
 }
+
+
 await getData()
 
 function Contests() {
@@ -63,7 +62,6 @@ function Contests() {
         window.localStorage.setItem('currentPage', currentPage);
     }, [currentPage]);
 
-
     return (
         <div className="body">
         <div className="main-container">
@@ -76,6 +74,26 @@ function Contests() {
                 </div>
                 <div className="content">
                     <div className="contests">
+                        <div className="contest">
+                            <div className="contest-name">{contest["contests"][0]["name"]}</div>
+                        </div>
+                        {/* <div className="contest">
+                            <div className="contest-name">{contest["contests"][1]["name"]}</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">{contest["contests"][2]["name"]}</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">{contest["contests"][3]["name"]}</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">{contest["contests"][4]["name"]}</div>
+                        </div>
+                        <div className="contest">
+                            <div className="contest-name">{contest["contests"][5]["name"]}</div>
+                        </div> */}
+
+
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
