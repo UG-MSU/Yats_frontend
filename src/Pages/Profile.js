@@ -89,7 +89,7 @@ function Profile() {
             Редактировать профиль
           </Link>
         </div>
-        <div className="Texts">
+        <div className="Texts"> 
           <div className="Buttons">
             <Link className="but" to={`/my-contests/1`}>
               Мои контесты
