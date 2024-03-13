@@ -2,14 +2,10 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../Styles/Registrat.css';
 import Cookies from "universal-cookie"
 const url = 'http://127.0.0.1:8000/';
-//for kinoman
-// import Cookies from "universal-cookie"
-// const cookies = new Cookies()
-// const token = cookies.get("token_auth")
  
 function LoginInput({refLogin, setLogin}){
   return (
@@ -53,6 +49,7 @@ function Yet_hadnt_acc () {
 function Authorization() {
   const [Login, setLogin] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const refLogin = React.createRef(null);
   const refPassword = React.createRef(null);
@@ -71,12 +68,8 @@ function Authorization() {
         "password": Password
       })
     };
-    // const requestOptionsGET = {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' },
-    // };
+  
     let resp = "";
-    //let role;
     fetch(url + 'auth/token/', requestOptions) 
     .then(response => response.json())
     .then(data => 
@@ -84,16 +77,11 @@ function Authorization() {
         resp = data["status"]
         console.log(resp)
         if (resp = "ok") {
-          // fetch(url + "/contest/has-permission-to-create-contest", requestOptionsGET)
-          //               .then(response => 
-          //                 response.json())
-          //               .then(data => {
-          //role = data["has_permission"];
           const token = data["access"]
           cookies.set("token_auth", token)
           console.log(token)
-          //               })
-          //               console.log(role)
+          navigate('/profile');
+
         } else {
           console.log("EGOR MOLODEC")
         }
@@ -102,20 +90,6 @@ function Authorization() {
     .catch(e => {
       console.log(e)
     })
-    
-
-    // .then(response => console.log(response.json()))
-    // .then(data => { resp = data.json()["error"]
-    //                 console.log(data.json()["error"])
-    //                 if(resp == "success"){
-    //                   fetch(url + "/auth/role", requestOptions)
-    //                   .then(response => console.log(response))
-    //                   .then(data => {
-    //                       role = data.json()["role"];
-    //                   })
-    //                 }
-    // })
-    // console.log(role);
   }
 
   return (

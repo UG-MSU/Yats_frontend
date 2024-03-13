@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
+import "../Styles/EditProfile.css";
 
 const URL = 'http://127.0.0.1:8000/auth/update';
 const cookies = new Cookies();
@@ -86,8 +87,9 @@ function EditProfile() {
     <>
       <Container className="Main">
         <form onSubmit={handleSubmit}>
-          <div className="Data">
-            <div className="Layout">
+          <div className="Data-editProfile">
+            <div className="forms">
+            <div className="Layout-editProfile">
               <h2>Введите имя:</h2>
               <h2>Введите фамилию:</h2>
               <h2>Введите отчество:</h2>
@@ -105,7 +107,10 @@ function EditProfile() {
               <input type="text" name="school" value={school} onChange={handleChange} />
               <input type="text" name="email" value={email} onChange={handleChange} />
             </div>
-            <button type="submit">Отправить данные</button>
+            </div>
+            <div>
+            <button className="button-edit" type="submit">Отправить данные</button>
+            </div>
           </div>
         </form>
       </Container>
