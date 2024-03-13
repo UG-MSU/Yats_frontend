@@ -5,33 +5,7 @@ import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Cookies from "universal-cookie"
 
-
 const URL = 'http://127.0.0.1:8000/auth/update'
-
-// let prof;
-// async function getData() {
-//   const cookies = new Cookies()
-//   const request = "Token " + cookies.get("token_auth")
-//   // console.log("PIZDECC")
-//   console.log(cookies.get("token_auth"))
-//   // try {
-//   // console.log("KEK__")
-//   await fetch(URL, {
-//       method: "GET",
-//       headers: {
-//           "Content-Type": "application/json",
-//           "Authorization": request
-//       }
-//   })
-//       .then(response => response.json())
-//       .then(data => {
-//           // console.log("__end__")
-//           console.log(JSON.stringify(data))
-//           prof = data
-//       })
-//   // console.log("END")
-// }
-// await getData()
 
 function Profile() {
 
