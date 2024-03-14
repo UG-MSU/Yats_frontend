@@ -9,7 +9,9 @@ import Poisk from '../Components/Poisk'
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { stringifyValueWithProperty } from 'react-native-web/dist/cjs/exports/StyleSheet/compiler';
-const URL = 'http://127.0.0.1:8000/contest/user-contests/?page=1'
+const URL_active = 'http://127.0.0.1:8000/contest/user-contests/?page=1'
+const URL_archived = 'http://127.0.0.1:8000/contest/user-contests/archived/?page=1'
+
 
 
 const Modal = ({ active, setActive, children }) => {
@@ -27,7 +29,7 @@ async function getData() {
     const request = "Token " + cookies.get("token_auth")
     console.log(cookies.get("token_auth"))
     console.log("KEK")
-    await fetch(URL , {
+    await fetch(URL_active , {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -40,13 +42,38 @@ async function getData() {
             contest = data
         })
 }
-
-
 await getData()
 
+let contest_archived; // список контестов
+async function getData_arc() {
+    const cookies = new Cookies()
+    const request = "Token " + cookies.get("token_auth")
+    console.log(cookies.get("token_auth"))
+    console.log("KEK")
+    await fetch(URL_archived , {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": request
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(JSON.stringify(data))
+            contest_archived = data
+        })
+}
+
+
+await getData_arc()
+
 function Contests() {
+    // (async () => await getData())()
+    // (async () => await getData_arc())()
     console.log(contest);
     console.log(contest["contests"]);
+    console.log("PIZ")
+    console.log(contest_archived);
 
     const [regActive, setRegActive] = useState(false);
     const [creatActive, setCreatActive] = useState(false);
@@ -74,24 +101,9 @@ function Contests() {
                 </div>
                 <div className="content">
                     <div className="contests">
-                        <div className="contest">
-                            <div className="contest-name">{contest["contests"][0]["name"]}</div>
-                        </div>
-                        {/* <div className="contest">
-                            <div className="contest-name">{contest["contests"][1]["name"]}</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">{contest["contests"][2]["name"]}</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">{contest["contests"][3]["name"]}</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">{contest["contests"][4]["name"]}</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">{contest["contests"][5]["name"]}</div>
-                        </div> */}
+                    {contest["contests"].map((contest, index) => (
+                            <div key={index} className="contest">{contest["name"]}</div>
+                        ))}
 
 
                         <nav aria-label="Page navigation example">
@@ -122,33 +134,16 @@ function Contests() {
                     </div>
                 </div>
             </div>
-
             
             <div className = "my-contests">
-
                 <div className="header">
                     <h2 className="header-title">Архив</h2>
                 </div>
                 <div className="content">
                     <div className="contests">
-                        <div className="contest">
-                            <div className="contest-name">{contest["contests"][0]["name"]}</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">Contest name</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">Contest name</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">Contest name</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">Contest name</div>
-                        </div>
-                        <div className="contest">
-                            <div className="contest-name">Contest name</div>
-                        </div>
+                        {contest_archived["contests"].map((contest, index) => (
+                            <div key={index} className="contest">{contest["name"]}</div>
+                        ))}
                     </div>
 
                     
@@ -159,7 +154,7 @@ function Contests() {
                 <h4>Регистрация</h4>
                 <input placeholder="введите id" className="input"></input>
                 <input placeholder="введите пароль" className="input"></input>
-                <div className="button pop-up--but">Зарегестрироваться</div>
+                <div className="button pop-up--but">Зарегистрироваться</div>
             </Modal>
 
             <Modal active={creatActive} setActive={setCreatActive}>

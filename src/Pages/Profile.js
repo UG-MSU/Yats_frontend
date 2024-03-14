@@ -65,7 +65,7 @@ function Profile() {
         </div>
         <div className="Texts"> 
           <div className="Buttons">
-            <Link className="but" to={`/my-contests/1`}>
+            <Link className="but" to={`/contests`}>
               Мои контесты
             </Link>
             <Link className="but" to={`/tasks-bank/1}`}>
