@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import Header from './Components/Header';
 import { contests } from './Pages/Contests';
+import { contest } from './Pages/Contest';
 import { authorization } from './Components/Authoriz';
 import { registration } from './Components/Registrat';
 import { profile } from './Pages//Profile';
@@ -18,6 +19,7 @@ root.render(
       <Routes>
         <Route exact path="/" Component = {App}/>
         <Route exact path="/contests" Component = {contests}/>
+        <Route exact path="/contest" Component = {contest}/>
         <Route exact path="/authorization" Component = {authorization}/>
         <Route exact path="/registration" Component = {registration}/>
         <Route exact path="/profile" Component={profile}/>
