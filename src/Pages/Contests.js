@@ -8,11 +8,12 @@ import Cookies from "universal-cookie"
 import Poisk from '../Components/Poisk'
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import { Link, useParams } from 'react-router-dom';
 import { stringifyValueWithProperty } from 'react-native-web/dist/cjs/exports/StyleSheet/compiler';
 const URL_active = 'http://127.0.0.1:8000/contest/user-contests/?page=1'
 const URL_archived = 'http://127.0.0.1:8000/contest/user-contests/archived/?page=1'
 
-
+const link = "/contest/"
 
 const Modal = ({ active, setActive, children }) => {
     return (
@@ -102,7 +103,7 @@ function Contests() {
                 <div className="content">
                     <div className="contests">
                     {contest["contests"].map((contest, index) => (
-                            <div key={index} className="contest">{contest["name"]}</div>
+                            <Nav.Link><Link to={link + String(contest["id_contest"])} style={{textDecoration: "none", color: 'black'}}><div key={index} className="contest">{contest["name"]}</div></Link></Nav.Link>
                         ))}
 
 
@@ -142,7 +143,7 @@ function Contests() {
                 <div className="content">
                     <div className="contests">
                         {contest_archived["contests"].map((contest, index) => (
-                            <div key={index} className="contest">{contest["name"]}</div>
+                            <Nav.Link><Link to={link + String(contest["id_contest"])} style={{textDecoration: "none", color: 'black'}}><div key={index} className="contest">{contest["name"]}</div></Link></Nav.Link>
                         ))}
                     </div>
 
