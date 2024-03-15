@@ -62,8 +62,8 @@ function Registration() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        "Login": Login,
-        "Password": Password
+        "username": Login,
+        "password": Password
       })
     };
       console.log(Login, Password)

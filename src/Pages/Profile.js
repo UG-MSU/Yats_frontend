@@ -68,9 +68,6 @@ function Profile() {
             <Link className="but" to={`/contests`}>
               Мои контесты
             </Link>
-            <Link className="but" to={`/tasks-bank/1}`}>
-              Банк задач
-            </Link>
           </div>
           <div className="Data">
             <div className="Layout">

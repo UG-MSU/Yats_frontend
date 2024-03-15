@@ -14,39 +14,46 @@ const postURL = 'http://127.0.0.1:8000/contest/user-submissions/'
 const getTasksURL = 'http://127.0.0.1:8000/contest/contest-tasks/?id='
 const getSubmissionsURL = 'http://127.0.0.1:8000/contest/task-submissions/?id='
 
-// function ShowSubmissions(submissions) {
-//     console.log(submissions)
-//     if ( submissions["submissions"] == null) {
-//         return (
-//         <div>error</div>
-//         )
-//     } else if ( submissions["submissions"].count == 0 ) {
-//         return (
-//         <div>посылок не было</div>
-//         )
-//     } else {
-//         return (
-//         <table>
-//             <thead>
-//                 <tr>
-//                 <td>Дата посылки</td>
-//                 <td>язык</td>
-//                 <td>статус</td>
-//                 </tr>
-//             </thead>
-//             <tbody>
-//                 {submissions["submissions"].map((submission, index) => (
-//                     <tr key={index}>
-//                         <td className="date" >submission["timestamp"]</td>
-//                         <td className="lang" >submission["lang"]</td>
-//                         <td className="status" >submission["status"]</td>
-//                     </tr>
-//                 ))}
-//             </tbody>
-//         </table>
-//         )
-//     }
-// }
+function ShowSubmissions(submissions) {
+    console.log(submissions)
+    if ( submissions["submissions"] == null) {
+        return (
+        <div>Посылок ещё не было..</div>
+        )
+    } else if ( submissions["submissions"].count == 0 ) {
+        return (
+        <div>Посылок ещё не было..</div>
+        )
+    } else {
+        const rows = []
+        console.log("subs length: ", submissions["submissions"]["submissions"].length)
+        for (var index = 0; index < submissions["submissions"]["submissions"].length; index++) {
+            var cur_sub = submissions["submissions"]["submissions"][index]
+            console.log("submission: ", cur_sub)
+            rows.push(
+            <tr key={index}>
+            <td className="date" > {index+1}</td>
+            <td className="lang" >{cur_sub["lang"]}</td>
+            <td className="status" >{cur_sub["status"]}</td>
+        </tr>
+            )
+        }
+        return (
+        <table>
+            <thead>
+                <tr>
+                <td>Номер посылки</td>
+                <td>язык</td>
+                <td>статус</td>
+                </tr>
+            </thead>
+            <tbody>
+                {rows}
+            </tbody>
+        </table>
+        )
+    }
+}
 
 function Contest() {
     console.log(1)
@@ -57,13 +64,14 @@ function Contest() {
     const [currentTask, setCurrentTask] = useState(0);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setCurrentTask(JSON.parse(window.localStorage.getItem('currentTask')));
-    }, []);
+    // useEffect(() => {
+    //     // setCurrentTask(JSON.parse(window.localStorage.getItem('currentTask')));
+    //     setCurrentTask(0);
+    // }, []);
 
-    useEffect(() => {
-        window.localStorage.setItem('currentTask', currentTask);
-    }, [currentTask]);
+    // useEffect(() => {
+    //     window.localStorage.setItem('currentTask', currentTask);
+    // }, [currentTask]);
 
 
     async function getData(id) {
@@ -177,8 +185,9 @@ function Contest() {
     if (loading) {
         return <p>Загрузка данных...</p>;
     }
-    
-    console.log(tasks[currentTask]);
+    console.log("currentTask:", currentTask)
+    console.log("tasks: ", tasks)
+    console.log("tasks[curentTask]: ", tasks[currentTask]);
 
     return (
         <div className="body">
@@ -207,33 +216,8 @@ function Contest() {
 
                 <div className='submissions-container'>
                     <h4>Посылки</h4>
-                    {/* <ShowSubmissions submissions = { submissions }/> */}
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Наименование</td>
-                                <td>Описание</td>
-                                <td>Цена</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Имя</td>
-                                <td>Характеристики</td>
-                                <td>Стоимость</td>
-                            </tr>
-                            <tr>
-                                <td>Имя #2</td>
-                                <td>Характеристики</td>
-                                <td>Стоимость</td>
-                            </tr>
-                            <tr>
-                                <td>Имя #3</td>
-                                <td>Характеристики</td>
-                                <td>Стоимость</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ShowSubmissions submissions = { submissions }/> 
+                
                 </div>
             </div>
             <div className='tasks-nav'>
